@@ -1,0 +1,23 @@
+{
+  "name": "central-unit",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidHernandez/central-unit.git"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/DavidHernandez/central-unit/issues"
+  },
+  "homepage": "https://github.com/DavidHernandez/central-unit#readme",
+  "devDependencies": {
+    "jest": "^24.7.1"
+  }
+}
