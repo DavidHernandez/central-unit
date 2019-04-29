@@ -1,14 +1,34 @@
-const http = require('http')
 
-const hostname = '127.0.0.1'
-const port = 3000
+const config = require('./config');
+const Bus = require('./src/infrastructure/Bus.js');
+const OrchestraDirector = require('./src/OrchestraDirector');
 
-const server = http.createServer((request, response) => {
-    response.statusCode = 200
-    response.setHeader('Content-Type', 'text/plain')
-    response.end('Hello world!')
-})
+(() => {
+  loadProviders();
+  startEndpoints();
+})();
 
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}`)
-})
+function loadProviders() {
+  const bus = new Bus();
+  for (const provider of config.providers) {
+    try {
+      const subscriptions = require('./src/packages/providers/' + provider);
+      for (subscription in subscriptions) {
+        bus.subscribe(subscription, subscriptions[subscription])
+      }
+    } catch (e) {
+      console.error('loading.provider', e);
+    }
+  }
+}
+
+function startEndpoints() {
+  const director = new OrchestraDirector();
+  for (const endpoint of config.endpoints) {
+    try {
+      require('./src/packages/endpoints/' + endpoint)(director);
+    } catch (e) {
+      console.error('loading.endpoint', e);
+    }
+  }
+}
