@@ -1,13 +1,15 @@
-import Bus from './infrastructure/Bus.js'
+const Bus = require('./infrastructure/Bus.js');
 
-export default class OrchestraDirector {
+class OrchestraDirector {
     constructor() {
         this.bus = new Bus()
     }
 
     conduct(phrase) {
-        const topic = phrase.service + '.' + phrase.action
+        const topic = phrase.provider + '.' + phrase.action
 
         this.bus.publish(topic, phrase.parameters)
     }
 }
+
+module.exports = OrchestraDirector;

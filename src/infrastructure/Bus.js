@@ -1,4 +1,4 @@
-export default class Bus {
+class Bus {
     constructor() {
         const bus = this.constructor.bus
 
@@ -6,7 +6,7 @@ export default class Bus {
             return bus
         }
 
-        this.actions = []
+        this.actions = {}
         this.constructor.bus = this
     }
 
@@ -32,3 +32,5 @@ export default class Bus {
         return !!this.actions[topic]
     }
 }
+
+module.exports = Bus;
