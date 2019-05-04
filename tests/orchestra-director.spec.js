@@ -8,10 +8,10 @@ describe('The orchestra director', () => {
         const bus = new Bus()
         let message = false
         const callback = (payload) => {message = true}
-        bus.subscribe('service.action', callback)
+        bus.subscribe('provider.action', callback)
 
         const phrase = {
-            service: "service",
+            provider: "provider",
             action: "action",
             parameters: []
         }
